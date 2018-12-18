@@ -1,4 +1,4 @@
-const cap = 755
+const cap = 764
 const margin = 10
 
 let gui={}
@@ -20,8 +20,13 @@ let textRuler = (()=>{
     return Math.ceil(ctx.measureText(text).width)
   }
 
+  function countSpaces(text) {
+    return text.split(" ").length - 1
+  }
+
   return {
-    measure: measure
+    measure: measure,
+    countSpaces: countSpaces
   }
 })()
 
@@ -67,7 +72,7 @@ let bulletPress = (string)=>{
     })
     return x.trim()
   }).map(x=>{
-    while (textRuler.measure(x) > cap && x.includes(' ')) {
+    while (textRuler.measure(x) > cap && textRuler.countSpaces(text) > 1) {
       x = x.split('').reverse().join('').replace(' ','\u2006').split('').reverse().join('')
     }
     return x
