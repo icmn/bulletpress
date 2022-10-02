@@ -8,8 +8,44 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <style>
+      :root {
+        --light-primary-bg: #FFFFFF;
+        --light-secondary-bg: #DDDDDD;
+        --light-fg: #000000;
+        --dark-primary-bg: #333333;
+        --dark-secondary-bg: #555555;
+        --dark-fg: #CCCCCC;
+      }
+      body * {
+        color: inherit;
+        background-color: inherit;
+      }
       .characterlength {
         font-family: "Consolas", monospace;
+      }
+      body.dark {
+        background-color: var(--light-fg);
+        color: var(--dark-fg);
+      }
+      body.dark .primary-color {
+        background-color: var(--dark-primary-bg);
+        color: var(--dark-fg);
+      }
+      body.dark .secondary-color {
+        background-color: var(--dark-secondary-bg);
+        color: var(--dark-fg);
+      }
+      body.light {
+        background-color: var(--dark-fg);
+        color: var(--light-fg);
+      }
+      body.light .primary-color {
+        background-color: var(--light-primary-bg);
+        color: var(--light-fg);
+      }
+      body.light .secondary-color {
+        background-color: var(--light-secondary-bg);
+        color: var(--light-fg);
       }
       textarea, .code {
         font-family: monospace;
@@ -29,6 +65,41 @@
         font-size: 14pt;
         line-height: 1.2;
       }
+      .toggle-switch label {
+        background-color: var(--light-fg);
+        border-radius: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        position: relative;
+        height: 26px;
+        width: 50px;
+        transform: scale(1.5);
+      }
+      .toggle-switch .ball {
+        /* background-color: #fff; */
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        height: 22px;
+        width: 22px;
+        transform: translateX(0px);
+        transition: transform 0.2s linear;
+      }
+      .toggle-switch input:checked + label .ball {
+        transform: translateX(24px);
+      }
+      .moon-icon {
+        background-color: unset;
+        height: 100%;
+      }
+      .sun-icon {
+        background-color: unset;
+        height: 100%;
+      }
       .toggle-text * {
         cursor: pointer;
       }
@@ -44,7 +115,7 @@
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container primary-color">
       <div style="position: relative; height: 4em;">
         <h2>Bulletpress</h2>
         <span style="position: absolute; right: 9%; top: 1em;" class="toggle-text">
@@ -54,12 +125,20 @@
             <i class="txt-alternate" title="PDF - Pixel Length">Style: AF1206</i>
           </label>
         </span>
+        <span title="dark/light theme switch" class="toggle-switch" style="position: absolute; right: 1em; top: 25%;">
+          <input id="ckbox-light-dark-mode" type="checkbox" checked style="display: none;" />
+          <label for="ckbox-light-dark-mode">
+            <img class="moon-icon" src="icons/icons8-moon-man.svg" alt="Active: Dark Mode">
+            <img class="sun-icon" src="icons/icons8-sun.svg" alt="Active: Light Mode">
+            <div class="ball secondary-color"></div>
+          </label>
+        </span>
         <div>
           <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tutorial">Show/Hide Tutorial</button>
         </div>
       </div>
       <br/>
-      <div id="tutorial" class="collapse card card-body">
+      <div id="tutorial" class="primary-color collapse card card-body">
         <h3>Tutorial</h3>
         
         <h4>Requirements</h4>
@@ -68,14 +147,14 @@
         <hr/>
         <h4>Step 1: Draft</h4>
         <p>Start with the information you want to convey - you may get 'No bullets of length/all bullets over length' - this is fine to start.</p>
-        <p class='code card card-body'>
+        <p class='secondary-color code card card-body'>
           Modernized award/annual review process; devoted 80hrs/engineered app--established AF-wide SOP/saved 3,500 man-hours annually
         </p>
 
         <hr/>
         <h4>Step 2: Optionalize</h4>
         <p>You can then begin to create substitutions by separating sections that can be substituted/reworded/omitted onto their own lines, and chaining options on the same line with pipes (|).  You can also make certain blocks 'optional' by placing a trailing pipe with no option after it.  Example:</p>
-        <p class='code card card-body'>
+        <p class='secondary-color code card card-body'>
           Modernized|Overhauled|Streamlined<br/>
           award|awd<br/>
           /<br/>
@@ -101,7 +180,7 @@
         <hr/>
         <h4>Step 3: Prune</h4>
         <p>Look at your top bullets and highlight the weakest portions of them.  Remove those options entirely until you're left with around 10 or fewer outputs.  Example:</p>
-        <p class='code card card-body'>
+        <p class='secondary-color code card card-body'>
           Modernized|Overhauled<br/>
           awd<br/>
           /<br/>
@@ -122,7 +201,7 @@
           hrs<br/>
         </p>
         <p>Pruning just a few options leaves me with only 4 outputs:</p>
-        <p class='times card card-body'>
+        <p class='secondary-color times card card-body'>
           - Modernized awd/annual review process; dedicated 80hrs/engineered app--established total-force SOP/saved 3.5K hrs<br/>
           - Overhauled awd/annual review process; dedicated 80hrs/engineered app--established total-force SOP/saved 3.5K hrs<br/>
           - Modernized awd/yearly review process; dedicated 80hrs/engineered app--established total-force SOP/saved 3.5K hrs<br/>
@@ -136,8 +215,14 @@
         <p><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tutorial">Hide Tutorial</button></p>
       </div>
       <div id="bulletpress-editor" class="characterlength">
-        <textarea rows="20" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
-        <div id="displayArea"></div>
+        <textarea class="secondary-color" rows="20" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
+        <div id="displayArea" class="primary-color"></div>
+      </div>
+      <hr>
+      <div style="text-align: center; font-size: x-small;">
+        <a target="_blank" href="https://icons8.com/icon/9313/sun">Sun</a> &
+        <a target="_blank" href="https://icons8.com/icon/48620/moon">Moon</a> icons by
+        <a target="_blank" href="https://icons8.com">Icons8</a>
       </div>
     </div>
   </body>
