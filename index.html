@@ -131,12 +131,33 @@
       .toggle-text input:checked + label .txt-alternate {
         display: none;
       }
+      .site-title {
+        font-family: monospace;
+        display: none;
+        margin-block-end: 0;
+        margin-block-start: 0;
+      }
+      .site-title img {
+        height: 1.5ch;
+        width: 0.5ch;
+        object-fit: cover;
+        transform: translateY(-0.25ch);
+      }
+      body.dark .dark-theme-show {
+        display: initial;
+      }
+      body.light .light-theme-show {
+        display: initial;
+      }
     </style>
   </head>
   <body>
     <div class="container primary-color">
       <div style="position: relative; height: 4em;">
-        <h2>Bulletpress</h2>
+        <span style="position: absolute; display: inline-block; left: 25%; width: 50%; top: 0.5em; text-align: center;">
+          <h2 class="site-title light-theme-show">BULLET<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAB+klEQVR4nO2bPS9DURyHnyKUIBIk9RLCWEkbDL4AJuEjGMwWS7+FxWbzAQwWJpsFi5eFCBOJCIulFmrovdqr6b2XuP9fo+dJztCck/yf++s9p+e0t+BwOITkgZxSoE1ZHFgGSsCF2EPGKXCillAxDHx4bVQl0aIqDKwAKa8tCT1kHFCe/yVgX+xiTjdQpBLAG9CjEFFNgUUgXfW6A1hQiCgD+M68uYWQWyq3v99upEaGjFF78X4bsZZRTIHZX/YlgiKA6ZC+GTMLD0UA2ZC+KTMLD0UAEyF942YWQl6ovwg+Cb1MaKf+xfvN9IhuPQXibHdNt8SNGEBv4hZVpCyLAa1EX+Ar8G7gAth/JTYEbEaM2QDuDVwkZIleBMP2CX+O8hshRyNguQiuAusxx24BOwm6fGG5CGaonPaegX7qvwEZEyN0a0AOOBTVDqAKYBLoE9UOoPpp7EhUtwbVHbAGXItqB1AFsAtciWoHaPqNkAtALaDGBaAWUOMCUAuocQGoBdS4AER1u7wmR3UaPAcGRLUDqAIYFNWtwa0BagE1LgC1gBoXgFpATdMHYLkPOAO2fzDWBOsHJDJEPw36ADwauEgoEP18QMFSyHorvAfcRYy5tBDxsZwCeWAu5thjygemf0Wc2998GjT9x6DlFEgDnTHHFin/j8jhSJhPpSZg7Lo7jLMAAAAASUVORK5CYII=">PRESS</h2>
+          <h2 class="site-title dark-theme-show">BULLET<img src="icons/icon-bullet.png">PRESS</h2>
+        </span>
         <span style="position: absolute; right: 9%; top: 1em;" class="toggle-text">
           <input id="ckbox-style-mode" type="checkbox" checked="checked" style="display: none;" />
           <label for="ckbox-style-mode">
