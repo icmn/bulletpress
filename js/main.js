@@ -28,6 +28,29 @@ const gui = {
     }
   },
 
+  get themeSwitch() {
+    let element = document.getElementById('ckbox-light-dark-mode')
+    let bodyElement = document.body
+
+    function isDarkMode() { return bodyElement.classList.contains("dark"); }
+    function isLightMode() { return bodyElement.classList.contains("light"); }
+
+    return {
+      isDarkMode,
+      isLightMode,
+      onclick: function(func) { element.addEventListener("click", func); },
+      changeMode: function() {
+        const isChecked = element.checked
+        if (isChecked && !isDarkMode()) {
+          bodyElement.classList.remove('light')
+          bodyElement.classList.add('dark')
+        } else if (!isChecked && !isLightMode()) {
+          bodyElement.classList.remove('dark')
+          bodyElement.classList.add('light')
+        }
+      }
+    }
+  },
 
   get destRuleSet() {
     let editor = document.getElementById("bulletpress-editor")
@@ -163,11 +186,16 @@ document.onreadystatechange = function () {
         bulletPress(gui.textArea.value).join('\n')
       )
     })
+    gui.themeSwitch.onclick(() => {
+      gui.themeSwitch.changeMode();
+    })
     gui.destRuleSet.onclick(() => {
       gui.destRuleSet.changeMode();
       gui.textArea.triggerInput();
     })
+
     // Trigger page
+    gui.themeSwitch.changeMode();
     gui.textArea.triggerInput();
   }
 }
