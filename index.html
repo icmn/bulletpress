@@ -8,27 +8,55 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <style>
-      .times {
-        font-family: 'Times New Roman';
-        font-size: 14pt;
-        line-height: 1.2;
+      .characterlength {
+        font-family: "Consolas", monospace;
       }
       textarea, .code {
         font-family: monospace;
-        font-size: 12pt;
+        font-size: 11pt;
         line-height: 1.2;
       }
       textarea {
         width: 100%;
       }
+      .pixelwidth {
+        font-family: 'Times New Roman';
+        font-size: 14pt;
+        line-height: 1.2;
+      }
+      .pixelwidth textarea {
+        font-family: 'Times New Roman';
+        font-size: 14pt;
+        line-height: 1.2;
+      }
+      .toggle-text * {
+        cursor: pointer;
+      }
+      .toggle-text .txt-primary {
+        display: none;
+      }
+      .toggle-text input:checked + label .txt-primary {
+        display: inline-block;
+      }
+      .toggle-text input:checked + label .txt-alternate {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h2>Bulletpress</h2>
-
-      <div>
-        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tutorial">Show/Hide Tutorial</button>
+      <div style="position: relative; height: 4em;">
+        <h2>Bulletpress</h2>
+        <span style="position: absolute; right: 9%; top: 1em;" class="toggle-text">
+          <input id="ckbox-style-mode" type="checkbox" checked="checked" style="display: none;" />
+          <label for="ckbox-style-mode">
+            <i class="txt-primary" title="115 Max Character Count">Style: MyEval</i>
+            <i class="txt-alternate" title="PDF - Pixel Length">Style: AF1206</i>
+          </label>
+        </span>
+        <div>
+          <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tutorial">Show/Hide Tutorial</button>
+        </div>
       </div>
       <br/>
       <div id="tutorial" class="collapse card card-body">
@@ -107,10 +135,10 @@
 
         <p><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tutorial">Hide Tutorial</button></p>
       </div>
-      <div>
-        <textarea rows="25" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
+      <div id="bulletpress-editor" class="characterlength">
+        <textarea rows="20" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
+        <div id="displayArea"></div>
       </div>
-      <div id="displayArea" class="times card card-body"></div>
     </div>
   </body>
 </html>
