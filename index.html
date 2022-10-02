@@ -53,7 +53,7 @@
         line-height: 1.2;
       }
       textarea {
-        width: 100%;
+        width: 116ch;
       }
       .pixelwidth {
         font-family: 'Times New Roman';
@@ -61,9 +61,28 @@
         line-height: 1.2;
       }
       .pixelwidth textarea {
+        width: 98ch;
         font-family: 'Times New Roman';
         font-size: 14pt;
         line-height: 1.2;
+      }
+      fieldset {
+        width: fit-content;
+        margin: auto;
+        display: block;
+        padding-block-start: 0.35em;
+        padding-inline-start: 0.75em;
+        padding-inline-end: 0.75em;
+        padding-block-end: 0.625em;
+        min-inline-size: min-content;
+        border-width: 2px;
+        border-style: groove;
+        border-color: rgb(192, 192, 192);
+        border-image: initial;
+      }
+      legend {
+        width: unset;
+        padding: 0 0.5ch;
       }
       .toggle-switch label {
         background-color: var(--light-fg);
@@ -215,8 +234,12 @@
         <p><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#tutorial">Hide Tutorial</button></p>
       </div>
       <div id="bulletpress-editor" class="characterlength">
-        <textarea class="secondary-color" rows="20" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
-        <div id="displayArea" class="primary-color"></div>
+        <fieldset>
+          <legend>Workbench</legend>
+          <textarea class="secondary-color" rows="20" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
+        </fieldset>
+        <br />
+        <div id="displayArea" class="primary-color" style="margin: auto; width:fit-content;"></div>
       </div>
       <hr>
       <div style="text-align: center; font-size: x-small;">
