@@ -42,7 +42,7 @@ let bulletPress = (string)=>{
   
   let replacements = [
     [/\s*--\s*/gi, '--'],   // 'asdf -- abcd' >>> 'asdf--abcd'
-    [/^\s+/gi, '- '],       // ' asdf' >>> '- asdf'
+    [/^\s*-?\s*/gi, '- '],       // ' asdf' >>> '- asdf'
     [/\s+$/gi, ''],         // 'asdf ' >>> 'asdf'
     [/\s*\/\s*/gi, '/'], 
     [/\s*,/gi, ','],
