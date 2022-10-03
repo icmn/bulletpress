@@ -148,9 +148,27 @@
           <textarea class="secondary-color" cols="115" rows="3"></textarea>
         </fieldset>
         <br>
-        <fieldset>
+        <fieldset style="position: relative;left: 0px;">
           <legend>Workbench</legend>
-          <textarea class="secondary-color" rows="20" cols="100" id="textArea">Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
+          <div style="display: inline-block; position: absolute; right: 1.25ch; z-index: 1; width: fit-content; padding: 1vh; border-style: outset; border-radius: 5px; height: 40ch;">
+            Word Search
+            <div>
+              <div style="height: 3em;">
+                <input type="text" style="margin: 1ch auto;">
+                <label style="cursor: pointer; height: 100%;">
+                  <button style="display: none;" type="button"></button>
+                  <img src="icons/icon-help.png" alt="Search Syntax Help Icon" style="height: 100%;">
+                </label>
+              </div>
+              <div style="overflow-y: scroll;height: 25ch;padding: 0 1ch;">
+                verblist
+              </div>
+            </div>
+          </div>
+          <textarea class="secondary-color" id="textArea"
+                    style="position: absolute; left: 1.25ch; width: calc(100% - 1.25ch*2); height: 40ch;"
+          >Modernized|Overhauled|Streamlined&#10;awd/&#10;annual|yearly&#10;review&#10;process|proc&#10;;&#10;devoted|dedicated&#10;80hrs/&#10;engineered|dev'd&#10;app&#10;--&#10;established&#10;AF-wide|total-force&#10;SOP/saved&#10;3.5K|4K&#10;hrs</textarea>
+          <div style="width: 116ch; height: 40ch; visibility: hidden;"></div>
         </fieldset>
         <br />
         <div id="displayArea" class="primary-color" style="margin: auto; width:fit-content;"></div>
