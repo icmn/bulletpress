@@ -1,0 +1,51 @@
+:root {
+    --light-primary-bg: #FFFFFF;
+    --light-secondary-bg: #DDDDDD;
+    --light-fg: #000000;
+    --dark-primary-bg: #333333;
+    --dark-secondary-bg: #555555;
+    --dark-fg: #CCCCCC;
+}
+
+body * {
+    color: inherit;
+    background-color: inherit;
+}
+
+body.dark {
+    background-color: var(--light-fg);
+    color: var(--dark-fg);
+}
+
+body.dark .primary-color {
+    background-color: var(--dark-primary-bg);
+    color: var(--dark-fg);
+}
+
+body.dark .secondary-color {
+    background-color: var(--dark-secondary-bg);
+    color: var(--dark-fg);
+}
+
+body.light {
+    background-color: var(--dark-fg);
+    color: var(--light-fg);
+}
+
+body.light .primary-color {
+    background-color: var(--light-primary-bg);
+    color: var(--light-fg);
+}
+
+body.light .secondary-color {
+    background-color: var(--light-secondary-bg);
+    color: var(--light-fg);
+}
+
+body.dark .dark-theme-show {
+    display: initial;
+}
+
+body.light .light-theme-show {
+    display: initial;
+}

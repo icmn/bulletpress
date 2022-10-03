@@ -1,0 +1,115 @@
+.characterlength {
+    font-family: "Consolas", monospace;
+}
+
+textarea, .code {
+    font-family: monospace;
+    font-size: 11pt;
+    line-height: 1.2;
+}
+
+textarea {
+    width: 116ch;
+}
+
+.pixelwidth {
+    font-family: 'Times New Roman';
+    font-size: 14pt;
+    line-height: 1.2;
+}
+
+.pixelwidth textarea {
+    width: 98ch;
+    font-family: 'Times New Roman';
+    font-size: 14pt;
+    line-height: 1.2;
+}
+
+fieldset {
+    width: fit-content;
+    margin: auto;
+    display: block;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: rgb(192, 192, 192);
+    border-image: initial;
+}
+
+legend {
+    width: unset;
+    padding: 0 0.5ch;
+}
+
+.toggle-switch label {
+    background-color: var(--light-fg);
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: relative;
+    height: 26px;
+    width: 50px;
+    transform: scale(1.5);
+}
+
+.toggle-switch .ball {
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 22px;
+    width: 22px;
+    transform: translateX(0px);
+    transition: transform 0.2s linear;
+}
+
+.toggle-switch input:checked+label .ball {
+    transform: translateX(24px);
+}
+
+.moon-icon {
+    background-color: unset;
+    height: 100%;
+}
+
+.sun-icon {
+    background-color: unset;
+    height: 100%;
+}
+
+.toggle-text * {
+    cursor: pointer;
+}
+
+.toggle-text .txt-primary {
+    display: none;
+}
+
+.toggle-text input:checked+label .txt-primary {
+    display: inline-block;
+}
+
+.toggle-text input:checked+label .txt-alternate {
+    display: none;
+}
+
+.site-title {
+    font-family: monospace;
+    display: none;
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+
+.site-title img {
+    height: 1.5ch;
+    width: 0.5ch;
+    object-fit: cover;
+    transform: translateY(-0.25ch);
+}
