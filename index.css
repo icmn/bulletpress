@@ -2,6 +2,11 @@
     font-family: "Consolas", monospace;
 }
 
+.char-overage {
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
 textarea, .code {
     font-family: monospace;
     font-size: 11pt;

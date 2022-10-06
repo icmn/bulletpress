@@ -24,7 +24,7 @@ const gui = {
     let element = document.getElementById('displayArea')
   
     return {
-      update: text => element.innerText = text
+      update: html => element.innerHTML = html
     }
   },
 
@@ -147,7 +147,7 @@ const bulletPress = (string) => {
   }).filter((x) => {
     if (gui.destPkg === DestinationPkgEnum.MyEval) {
       charLength = x.length
-      return charLength <= MAX_CHARS
+      return charLength <= MAX_CHARS+3
     } else if (gui.destPkg === DestinationPkgEnum.AF1206) {
       pixelLength = gui.textRuler.measure(x)
       return pixelLength <= cap && pixelLength >= cap - margin
@@ -161,9 +161,21 @@ const bulletPress = (string) => {
     }
     return 0
   })
-  if (bullets.length) {
+  if (bullets.length > 0) {
     if (gui.destPkg === DestinationPkgEnum.MyEval) {
-      bullets.unshift(Array(MAX_CHARS).fill("#").join(''))
+      // Add overage formatting cue
+      bullets = bullets.map((str) => {
+        if (str.length > MAX_CHARS) {
+          return [
+            str.substring(0, MAX_CHARS),
+            '<span class="error-font char-overage">',
+            str.substring(MAX_CHARS),
+            '</span>'
+          ].join('');
+        }
+        return str;
+      })
+      bullets.unshift(Array(MAX_CHARS).fill("#").join(''));
     } else if (gui.destPkg === DestinationPkgEnum.AF1206) {
       visual_cue = "-"
       do {
@@ -171,9 +183,9 @@ const bulletPress = (string) => {
       } while (gui.textRuler.measure(visual_cue) < cap)
       bullets.unshift(visual_cue)
     }
-    return bullets
+    return bullets.map((bullet) => '<div>' + bullet + '</div>');
   }
-  return [ 'No bullets of length/all bullets over length' ]
+  return [ '<div>No bullets of length/all bullets over length</div>' ]
 }
 
 
@@ -183,7 +195,7 @@ document.onreadystatechange = function () {
     // Setup html listeners
     gui.textArea.oninput(() => {
       gui.displayArea.update(
-        bulletPress(gui.textArea.value).join('\n')
+        bulletPress(gui.textArea.value).join('')
       )
     })
     gui.themeSwitch.onclick(() => {
