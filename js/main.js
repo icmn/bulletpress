@@ -1,45 +1,53 @@
 const cap = 764
 const margin = 10
 const MAX_CHARS = 115
-
 const DestinationPkgEnum = Object.freeze({
   'MyEval': 'MyEval',
   'AF1206': 'AF1206'
-})
+});
 
-const gui = {
+(function (factory) {
+  this.gui = factory();
+}.bind(window, function () {
 
-  get destPkg() { return gui.destRuleSet.ruleStyle; },
+  // Lazy Loaded
+  let workbench = null;
+  let displayArea = null;
+  let themeSwitch = null;
+  let destRuleSet = null;
+  let textRuler = null;
 
-  get textArea() {
-    let element = document.getElementById('textArea')
-    return {
-      get value() { return element.value },
-      oninput: function(func) { element.addEventListener("input", func) },
-      triggerInput: function () { element.dispatchEvent(new Event("input")) }
+  function getWorkBench() {
+    if (workbench === null) {
+      let element = document.getElementById('textArea');
+      workbench = {
+        get value() { return element.value },
+        oninput: function(func) { element.addEventListener("input", func) },
+        triggerInput: function () { element.dispatchEvent(new Event("input")) }
+      }
     }
-  },
+    return workbench;
+  }
 
-  get displayArea() {
-    let element = document.getElementById('displayArea')
-  
-    return {
-      update: html => element.innerHTML = html
+  function getDisplayArea() {
+    if (displayArea === null) {
+      let element = document.getElementById('displayArea');
+      displayArea = {
+        update: html => element.innerHTML = html
+      }
     }
-  },
+    return displayArea;
+  }
 
-  get themeSwitch() {
-    let element = document.getElementById('ckbox-light-dark-mode')
-    let bodyElement = document.body
-
-    function isDarkMode() { return bodyElement.classList.contains("dark"); }
-    function isLightMode() { return bodyElement.classList.contains("light"); }
-
-    return {
-      isDarkMode,
-      isLightMode,
-      onclick: function(func) { element.addEventListener("click", func); },
-      changeMode: function() {
+  function getThemeSwitch() {
+    if (themeSwitch === null) {
+      let element = document.getElementById('ckbox-light-dark-mode')
+      let bodyElement = document.body
+    
+      function isDarkMode() { return bodyElement.classList.contains("dark"); }
+      function isLightMode() { return bodyElement.classList.contains("light"); }
+      function onclick(func) { element.addEventListener("click", func); }
+      function changeMode() {
         const isChecked = element.checked
         if (isChecked && !isDarkMode()) {
           bodyElement.classList.remove('light')
@@ -49,23 +57,26 @@ const gui = {
           bodyElement.classList.add('light')
         }
       }
+      themeSwitch = Object.freeze({
+        isDarkMode,
+        isLightMode,
+        onclick,
+        changeMode
+      });
     }
-  },
+    return themeSwitch;
+  }
 
-  get destRuleSet() {
-    let editor = document.getElementById("bulletpress-editor")
-    let element = document.getElementById("ckbox-style-mode")
-    let mode = DestinationPkgEnum.MyEval // DEFAULT == checked
-
-    function isMyEvalStyle() { return mode === DestinationPkgEnum.MyEval }
-    function is1206Style() { return mode === DestinationPkgEnum.AF1206 }
-
-    return {
-      get ruleStyle() { 
-        return element.checked ? DestinationPkgEnum.MyEval : DestinationPkgEnum.AF1206;
-      },
-      onclick: function(func) { element.addEventListener("click", func); },
-      changeMode: function() {
+  function getDestRuleSet() {
+    if (destRuleSet === null) {
+      let editor = document.getElementById("bulletpress-editor")
+      let element = document.getElementById("ckbox-style-mode")
+      let mode = DestinationPkgEnum.MyEval // DEFAULT == checked
+    
+      function isMyEvalStyle() { return mode === DestinationPkgEnum.MyEval }
+      function is1206Style() { return mode === DestinationPkgEnum.AF1206 }
+      function onclick(func) { element.addEventListener("click", func); }
+      function changeMode() {
         const isChecked = element.checked
         if (isChecked && isMyEvalStyle()) {
           // Change to MyEval
@@ -77,28 +88,50 @@ const gui = {
           editor.classList.add("pixelwidth")
         }
       }
+      destRuleSet = Object.freeze({
+        get ruleStyle() {
+          return element.checked ? DestinationPkgEnum.MyEval : DestinationPkgEnum.AF1206;
+        },
+        isMyEvalStyle,
+        onclick,
+        changeMode
+      });
     }
-  },
-
-  get textRuler() {
-    let canvas = document.createElement('canvas')
-    let ctx = canvas.getContext('2d')
-    ctx.font="12pt Times New Roman"
-  
-    function measure(text) {
-      return Math.ceil(ctx.measureText(text).width)
-    }
-  
-    function countSpaces(text) {
-      return text.split(" ").length - 1
-    }
-  
-    return {
-      measure: measure,
-      countSpaces: countSpaces
-    }
+    return destRuleSet;
   }
-}
+
+  function getTextRuler(){
+    if (textRuler === null) {
+      let canvas = document.createElement('canvas')
+      let ctx = canvas.getContext('2d')
+      ctx.font="12pt Times New Roman"
+    
+      function measure(text) {
+        return Math.ceil(ctx.measureText(text).width)
+      }
+    
+      function countSpaces(text) {
+        return text.split(" ").length - 1
+      }
+      
+      textRuler = {
+        measure: measure,
+        countSpaces: countSpaces
+      }
+    }
+    return textRuler;
+  }
+
+  return {
+    get destPkg() { return getDestRuleSet().ruleStyle; },
+    get textArea() { return getWorkBench(); },
+    get displayArea() { return getDisplayArea(); },
+    get themeSwitch() { return getThemeSwitch(); },
+    get destRuleSet() { return getDestRuleSet(); },
+    get textRuler() { return getTextRuler(); }
+  };
+
+}))();
 
 
 const bulletPress = (string) => {
