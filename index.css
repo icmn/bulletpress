@@ -118,3 +118,34 @@ legend {
     object-fit: cover;
     transform: translateY(-0.25ch);
 }
+
+.search-tab .arrow-up {
+    border-bottom-left-radius: 3px;
+    border-left-width: 4ch;
+    border-right-width: 4ch;
+    border-bottom-width: 3ch;
+}
+
+.search-tab input + label .close-search-tab {
+    display: none;
+}
+
+.search-tab input:checked + label .open-search-tab {
+    display: none;
+}
+
+.search-tab input:checked + label .close-search-tab {
+    display: inline-block;
+}
+
+.search-dialog {
+    display: inline-block;
+    position: absolute;
+    right: 1.25ch;
+    z-index: 1;
+    width: fit-content;
+    height: 40ch;
+    padding: 1vh;
+    border-style: outset;
+    border-radius: 5px;
+}
