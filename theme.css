@@ -97,3 +97,8 @@ body.dark .dark-theme-show {
 body.light .light-theme-show {
     display: initial;
 }
+
+
+body .hide {
+    display: none;
+}
