@@ -1,12 +1,14 @@
 :root {
     --light-primary-bg: #FFFFFF;
     --light-secondary-bg: #DDDDDD;
+    --light-tertiary-bg: #999999;
     --light-fg: #000000;
     --light-error: red;
     --light-warning: rgb(255, 231, 11);
     --light-success: green;
     --dark-primary-bg: #333333;
     --dark-secondary-bg: #555555;
+    --dark-tertiary-bg: #AAAAAA;
     --dark-fg: #CCCCCC;
     --dark-error: darkred;
     --dark-warning: rgb(200, 183, 4);
@@ -31,6 +33,15 @@ body.dark .primary-color {
 body.dark .secondary-color {
     background-color: var(--dark-secondary-bg);
     color: var(--dark-fg);
+}
+
+body.dark .tertiary-color {
+    background-color: var(--dark-tertiary-bg);
+    color: var(--dark-primary-bg);
+}
+
+body.dark .arrow-up {
+    border-bottom-color: var(--dark-tertiary-bg);
 }
 
 body.dark .error-font {
@@ -63,6 +74,15 @@ body.light .secondary-color {
     color: var(--light-fg);
 }
 
+body.light .tertiary-color {
+    background-color: var(--light-tertiary-bg);
+    color: var(--light-primary-bg);
+}
+
+body.light .arrow-up {
+    border-bottom-color: var(--light-tertiary-bg);
+}
+
 body.light .error-font {
     color: var(--light-error);
     font-weight: bolder;
@@ -84,4 +104,68 @@ body.dark .dark-theme-show {
 
 body.light .light-theme-show {
     display: initial;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left-width: 2ch;
+    border-left-style: solid;
+    border-left-color: transparent;
+    border-right-width: 2ch;
+    border-right-style: solid;
+    border-right-color: transparent;
+
+    border-bottom-width: 2ch;
+    border-bottom-style: solid;
+    border-bottom-color: inherit;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left-width: 2ch;
+    border-left-style: solid;
+    border-left-color: transparent;
+    border-right-width: 2ch;
+    border-right-style: solid;
+    border-right-color: transparent;
+
+    border-top-width: 2ch;
+    border-top-style: solid;
+    border-top-color: inherit;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top-width: 2ch;
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-bottom-width: 2ch;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+
+    border-left-width: 2ch;
+    border-left-style: solid;
+    border-left-color: inherit;
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top-width: 2ch;
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-bottom-width: 2ch;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+
+    border-right-width: 2ch;
+    border-right-style: solid;
+    border-right-color: inherit;
+}
+
+body .hide {
+    display: none;
 }
