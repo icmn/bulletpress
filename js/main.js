@@ -16,6 +16,7 @@ const DestinationPkgEnum = Object.freeze({
   let themeSwitch = null;
   let destRuleSet = null;
   let textRuler = null;
+  let wordsearch = null;
 
   function getWorkBench() {
     if (workbench === null) {
@@ -100,7 +101,7 @@ const DestinationPkgEnum = Object.freeze({
     return destRuleSet;
   }
 
-  function getTextRuler(){
+  function getTextRuler() {
     if (textRuler === null) {
       let canvas = document.createElement('canvas')
       let ctx = canvas.getContext('2d')
@@ -122,13 +123,62 @@ const DestinationPkgEnum = Object.freeze({
     return textRuler;
   }
 
+  function getWordSearch() {
+    if (wordsearch === null) {
+      const toggleBtn = document.getElementById("ckbox-word-search-show")
+      const searchtxtbox = document.getElementById("txtbox-word-search")
+      const searchDialog = document.getElementById("bulletpress-editor").querySelector(".search-dialog")
+      const wordListView = document.getElementById("bulletpress-editor").querySelector(".search-results-wordlist")
+
+      function triggerSearchInput() {
+        searchtxtbox.dispatchEvent(new Event("input"))
+      }
+
+      function toggleViewOfSearchDialog() {
+        searchDialog.classList.toggle("hide");
+        if (!searchDialog.classList.contains("hide")) {
+          triggerSearchInput();
+          searchtxtbox.focus();
+        } else {
+          searchDialog.dispatchEvent(new Event("dialogClose"));
+        }
+      }
+
+      function updateWordListView(wordDefList) {
+        if (Array.prototype !== Object.getPrototypeOf(wordDefList)) return;
+        const wordListHtml = (wordDefList.length === 0)
+          ? '<div style="text-align: center;">no matches found.</div>'
+          : wordDefList.map((wordDef) => {
+              return `<div>${wordDef['word']}</div>`
+            }).reduce((prev, wordhtml, i, all_words) => `${prev}${wordhtml}`, "");
+        wordListView.innerHTML = wordListHtml;
+      }
+
+      wordsearch = {
+        toggleViewOfSearchDialog,
+        onDialogClose: function(func) { searchDialog.addEventListener("dialogClose", func); },
+        onclick: function(func) { toggleBtn.addEventListener("click", func); },
+        searchtext: {
+          get value() { return searchtxtbox.value },
+          oninput: function(func) { searchtxtbox.addEventListener("input", func) },
+          triggerInput: triggerSearchInput
+        },
+        wordlist: {
+          update: updateWordListView
+        }
+      }
+    }
+    return wordsearch;
+  }
+
   return {
     get destPkg() { return getDestRuleSet().ruleStyle; },
     get textArea() { return getWorkBench(); },
     get displayArea() { return getDisplayArea(); },
     get themeSwitch() { return getThemeSwitch(); },
     get destRuleSet() { return getDestRuleSet(); },
-    get textRuler() { return getTextRuler(); }
+    get textRuler() { return getTextRuler(); },
+    get wordsearch() { return getWordSearch(); }
   };
 
 }))();
@@ -237,6 +287,14 @@ document.onreadystatechange = function () {
     gui.destRuleSet.onclick(() => {
       gui.destRuleSet.changeMode();
       gui.textArea.triggerInput();
+    })
+    gui.wordsearch.onclick(() => {
+      gui.wordsearch.toggleViewOfSearchDialog();
+    })
+    gui.wordsearch.searchtext.oninput(() => {
+      gui.wordsearch.wordlist.update(
+        Dictionary.search(gui.wordsearch.searchtext.value)
+      )
     })
 
     // Trigger page
