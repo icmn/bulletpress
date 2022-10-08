@@ -24,7 +24,8 @@ const DestinationPkgEnum = Object.freeze({
       workbench = {
         get value() { return element.value },
         oninput: function(func) { element.addEventListener("input", func) },
-        triggerInput: function () { element.dispatchEvent(new Event("input")) }
+        triggerInput: function () { element.dispatchEvent(new Event("input")) },
+        focus: function() { element.focus(); }
       }
     }
     return workbench;
@@ -295,6 +296,9 @@ document.onreadystatechange = function () {
       gui.wordsearch.wordlist.update(
         Dictionary.search(gui.wordsearch.searchtext.value)
       )
+    })
+    gui.wordsearch.onDialogClose(() => {
+      gui.textArea.focus();
     })
 
     // Trigger page
