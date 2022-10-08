@@ -1,12 +1,14 @@
 :root {
     --light-primary-bg: #FFFFFF;
     --light-secondary-bg: #DDDDDD;
+    --light-tertiary-bg: #999999;
     --light-fg: #000000;
     --light-error: red;
     --light-warning: rgb(255, 231, 11);
     --light-success: green;
     --dark-primary-bg: #333333;
     --dark-secondary-bg: #555555;
+    --dark-tertiary-bg: #AAAAAA;
     --dark-fg: #CCCCCC;
     --dark-error: darkred;
     --dark-warning: rgb(200, 183, 4);
@@ -31,6 +33,11 @@ body.dark .primary-color {
 body.dark .secondary-color {
     background-color: var(--dark-secondary-bg);
     color: var(--dark-fg);
+}
+
+body.dark .tertiary-color {
+    background-color: var(--dark-tertiary-bg);
+    color: var(--dark-primary-bg);
 }
 
 body.dark .error-font {
@@ -61,6 +68,11 @@ body.light .primary-color {
 body.light .secondary-color {
     background-color: var(--light-secondary-bg);
     color: var(--light-fg);
+}
+
+body.light .tertiary-color {
+    background-color: var(--light-tertiary-bg);
+    color: var(--light-primary-bg);
 }
 
 body.light .error-font {
