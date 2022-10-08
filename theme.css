@@ -40,6 +40,10 @@ body.dark .tertiary-color {
     color: var(--dark-primary-bg);
 }
 
+body.dark .arrow-up {
+    border-bottom-color: var(--dark-tertiary-bg);
+}
+
 body.dark .error-font {
     color: var(--dark-error);
     font-weight: bolder;
@@ -75,6 +79,10 @@ body.light .tertiary-color {
     color: var(--light-primary-bg);
 }
 
+body.light .arrow-up {
+    border-bottom-color: var(--light-tertiary-bg);
+}
+
 body.light .error-font {
     color: var(--light-error);
     font-weight: bolder;
@@ -98,6 +106,65 @@ body.light .light-theme-show {
     display: initial;
 }
 
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left-width: 2ch;
+    border-left-style: solid;
+    border-left-color: transparent;
+    border-right-width: 2ch;
+    border-right-style: solid;
+    border-right-color: transparent;
+
+    border-bottom-width: 2ch;
+    border-bottom-style: solid;
+    border-bottom-color: inherit;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left-width: 2ch;
+    border-left-style: solid;
+    border-left-color: transparent;
+    border-right-width: 2ch;
+    border-right-style: solid;
+    border-right-color: transparent;
+
+    border-top-width: 2ch;
+    border-top-style: solid;
+    border-top-color: inherit;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top-width: 2ch;
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-bottom-width: 2ch;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+
+    border-left-width: 2ch;
+    border-left-style: solid;
+    border-left-color: inherit;
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top-width: 2ch;
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-bottom-width: 2ch;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+
+    border-right-width: 2ch;
+    border-right-style: solid;
+    border-right-color: inherit;
+}
 
 body .hide {
     display: none;
