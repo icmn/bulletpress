@@ -35,7 +35,6 @@
      * @returns {{ word: string, type: string, strength: number, leadership: boolean }[]}
      */
     function cachedSearch(searchstr) {
-        debugger;
         let results = prevResults;
         let searchTokens = preprocess_search_args(searchstr);
         if (searchTokens.join(' ') === prevSearchTokens) {
@@ -47,7 +46,6 @@
             prevResults = results; // save off results
             prevSearchTokens = searchTokenDef['searchstr']; // save off terms that created results
         }
-        debugger;
         return results;
     }
 
@@ -57,7 +55,6 @@
      * @returns {string[]}
      */
     function preprocess_search_args(searchstr) {
-        debugger;
         if (searchstr === undefined || searchstr === null) {
             return [];
         } else if (typeof searchstr !== "string") {
@@ -74,7 +71,6 @@
      * @returns {{ cmds: string[], plain: string[], searchstr: string }}
      */
     function process_cmd_args(tokens) {
-        debugger;
         let tokenDef = { 'cmds': [], 'plain': [], 'searchstr': "" };
         if (Array.prototype !== Object.getPrototypeOf(tokens)) {
             throw TypeError("Invalid parameter type.");
@@ -136,7 +132,6 @@
         let len_match = null;
         let verb_match = null;
         let leader_match = null;
-        debugger;
         cmdTokens.forEach((token) => {
             if (len_match = len_regex.exec(token)) {
                 if (!len_match[1] || false) return;
