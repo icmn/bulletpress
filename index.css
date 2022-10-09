@@ -2,6 +2,14 @@
     font-family: "Consolas", monospace;
 }
 
+body.dark .github-fork-ribbon::before {
+    background-color: var(--dark-success);
+}
+
+body.light .github-fork-ribbon::before {
+    background-color: var(--light-success);
+}
+
 .char-overage {
     text-decoration: underline;
     font-weight: bolder;
