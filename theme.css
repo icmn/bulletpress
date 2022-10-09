@@ -27,6 +27,10 @@ body.dark {
     color: var(--dark-fg);
 }
 
+body.dark hr {
+    background-color: var(--dark-secondary-bg);
+}
+
 body.dark .primary-color {
     background-color: var(--dark-primary-bg);
     color: var(--dark-fg);
