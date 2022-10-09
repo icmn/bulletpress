@@ -142,10 +142,14 @@ legend {
     display: inline-block;
     position: absolute;
     right: 1.25ch;
-    z-index: 1;
-    width: fit-content;
+    z-index: 10;
+    width: 30ch;
     height: 40ch;
     padding: 1vh;
     border-style: outset;
     border-radius: 5px;
+}
+
+body.light .search-dialog {
+    border-color: var(--light-tertiary-bg);
 }
