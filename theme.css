@@ -117,6 +117,18 @@ body.light .light-theme-show {
     display: initial;
 }
 
+body.dark code {
+    background-color: var(--dark-tertiary-bg);
+    padding: 0.25ch;
+    border-radius: 0.5ch;
+}
+
+body.light code {
+    background-color: var(--light-tertiary-bg);
+    padding: 0.25ch;
+    border-radius: 0.5ch;
+}
+
 .arrow-up {
     width: 0;
     height: 0;
