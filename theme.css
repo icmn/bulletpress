@@ -6,6 +6,7 @@
     --light-error: red;
     --light-warning: rgb(255, 231, 11);
     --light-success: green;
+    --light-help-bg: rgb(253, 239, 191);
     --dark-primary-bg: #333333;
     --dark-secondary-bg: #555555;
     --dark-tertiary-bg: #AAAAAA;
@@ -13,6 +14,7 @@
     --dark-error: darkred;
     --dark-warning: rgb(200, 183, 4);
     --dark-success: darkgreen;
+    --dark-help-bg: rgb(158, 143, 91);
 }
 
 body * {
@@ -38,6 +40,11 @@ body.dark .secondary-color {
 body.dark .tertiary-color {
     background-color: var(--dark-tertiary-bg);
     color: var(--dark-primary-bg);
+}
+
+body.dark .helpbox {
+    background-color: var(--dark-help-bg);
+    color: var(--light-fg);
 }
 
 body.dark .arrow-up {
@@ -77,6 +84,10 @@ body.light .secondary-color {
 body.light .tertiary-color {
     background-color: var(--light-tertiary-bg);
     color: var(--light-primary-bg);
+}
+
+body.light .helpbox {
+    background-color: var(--light-help-bg);
 }
 
 body.light .arrow-up {
