@@ -126,10 +126,14 @@ const DestinationPkgEnum = Object.freeze({
 
   function getWordSearch() {
     if (wordsearch === null) {
-      const toggleBtn = document.getElementById("ckbox-word-search-show")
-      const searchtxtbox = document.getElementById("txtbox-word-search")
-      const searchDialog = document.getElementById("bulletpress-editor").querySelector(".search-dialog")
-      const wordListView = document.getElementById("bulletpress-editor").querySelector(".search-results-wordlist")
+      const bulletpressEditor = document.getElementById("bulletpress-editor");
+      const toggleBtn = document.getElementById("ckbox-word-search-show");
+      const searchtxtbox = document.getElementById("txtbox-word-search");
+      const searchDialog = bulletpressEditor.querySelector(".search-dialog");
+      const wordListView = bulletpressEditor.querySelector(".search-results-wordlist");
+      const searchDialogHelpBtn = document.getElementById("ckbox-search-help-show");
+      const searchHelpDialog = bulletpressEditor.querySelector(".search-dialog-help");
+      const searchHelpCloseBtn = bulletpressEditor.querySelector(".search-dialog-help-close-btn");
 
       function triggerSearchInput() {
         searchtxtbox.dispatchEvent(new Event("input"))
@@ -163,6 +167,26 @@ const DestinationPkgEnum = Object.freeze({
           get value() { return searchtxtbox.value },
           oninput: function(func) { searchtxtbox.addEventListener("input", func) },
           triggerInput: triggerSearchInput
+        },
+        help: {
+          hideDialog: function() {
+            if (!searchHelpDialog.classList.contains("hide")) {
+              searchHelpDialog.classList.add("hide")
+              searchHelpDialog.dispatchEvent(new Event("dialogClose"));
+              // searchtxtbox.focus();
+            }
+          },
+          showDialog: function() {
+            if (searchHelpDialog.classList.contains("hide")) {
+              searchHelpDialog.classList.remove("hide");
+            }
+          },
+          showBtn: {
+            onclick: function(func) { searchDialogHelpBtn.addEventListener("click", func); }
+          },
+          closeBtn: {
+            onclick: function(func) { searchHelpCloseBtn.addEventListener("click", func); }
+          }
         },
         wordlist: {
           update: updateWordListView
@@ -280,25 +304,32 @@ document.onreadystatechange = function () {
     gui.textArea.oninput(() => {
       gui.displayArea.update(
         bulletPress(gui.textArea.value).join('')
-      )
-    })
+      );
+    });
     gui.themeSwitch.onclick(() => {
       gui.themeSwitch.changeMode();
-    })
+    });
     gui.destRuleSet.onclick(() => {
       gui.destRuleSet.changeMode();
       gui.textArea.triggerInput();
-    })
+    });
     gui.wordsearch.onclick(() => {
       gui.wordsearch.toggleViewOfSearchDialog();
-    })
+    });
     gui.wordsearch.searchtext.oninput(() => {
       gui.wordsearch.wordlist.update(
         Dictionary.search(gui.wordsearch.searchtext.value)
       )
-    })
+    });
     gui.wordsearch.onDialogClose(() => {
+      gui.wordsearch.help.hideDialog();
       gui.textArea.focus();
+    });
+    gui.wordsearch.help.showBtn.onclick(() => {
+      gui.wordsearch.help.showDialog();
+    });
+    gui.wordsearch.help.closeBtn.onclick(() => {
+      gui.wordsearch.help.hideDialog();
     })
 
     // Trigger page
