@@ -4,7 +4,7 @@
     --light-tertiary-bg: #999999;
     --light-fg: #000000;
     --light-error: red;
-    --light-warning: rgb(255, 231, 11);
+    --light-warning: rgb(190, 159, 5);
     --light-success: green;
     --light-help-bg: rgb(253, 239, 191);
     --dark-primary-bg: #333333;
@@ -12,7 +12,7 @@
     --dark-tertiary-bg: #AAAAAA;
     --dark-fg: #CCCCCC;
     --dark-error: darkred;
-    --dark-warning: rgb(200, 183, 4);
+    --dark-warning: rgb(200, 180, 4);
     --dark-success: darkgreen;
     --dark-help-bg: rgb(158, 143, 91);
 }

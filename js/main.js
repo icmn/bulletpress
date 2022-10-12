@@ -275,7 +275,9 @@ const bulletPress = (string) => {
       bullets = bullets.map((str) => {
         if (str.length > MAX_CHARS) {
           return [
+            '<span class="warning-font">',
             str.substring(0, MAX_CHARS),
+            '</span>',
             '<span class="error-font char-overage">',
             str.substring(MAX_CHARS),
             '</span>'
