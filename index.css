@@ -36,6 +36,10 @@ body.light .footer {
     font-family: "Consolas", monospace;
 }
 
+.github-fork-ribbon {
+    background-color: initial;
+}
+
 body.dark .github-fork-ribbon::before {
     background-color: var(--dark-success);
 }
