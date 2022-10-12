@@ -3,9 +3,9 @@
     this.Dictionary = factory();
 }.bind(window, function () {
 
-    const verb_regex = RegExp(/\btype:(verb)?\b/i);
-    const len_regex = RegExp(/\blen(?:gth)?:([0-9][0-9]?)?\b/i);
-    const leader_regex = RegExp(/\b(?:led|(?:lead(?:er(?:ship)?)?)):(true|y(?:es?)?|false|n(?:o)?)?\b/i);
+    const wordTypeRegex = RegExp(/\btype:(verb)?\b/i);
+    const lenRegex = RegExp(/\blen(?:gth)?:([0-9][0-9]?)?\b/i);
+    const leaderRegex = RegExp(/\b(?:led|(?:lead(?:er(?:ship)?)?)):(true|y(?:es?)?|false|n(?:o)?)?\b/i);
 
     let words = null;
     let prevSearchTokens = null;
@@ -80,9 +80,9 @@
         // Parse user input for search commands/filters
         let regex_match = null;
         let first_group_matching_regexes = [
-            len_regex,
-            verb_regex,
-            leader_regex
+            lenRegex,
+            wordTypeRegex,
+            leaderRegex
         ];
         tokens.forEach((token) => {
             if (token.includes(":")) {
@@ -126,25 +126,25 @@
         }
         
         // Determine filters from commands (since preprocessed, cmds should be valid)
-        let max_len = null;
+        let maxLen = null;
         let filter4Verbs = false;
         let filter4leadership = null; // type: null | true | false
-        let len_match = null;
-        let verb_match = null;
-        let leader_match = null;
+        let lenMatch = null;
+        let wordTypeMatch = null;
+        let leaderMatch = null;
         cmdTokens.forEach((token) => {
-            if (len_match = len_regex.exec(token)) {
-                if (!len_match[1] || false) return;
-                max_len = Number.parseInt(len_match[1]); // Group 1 = number value
+            if (lenMatch = lenRegex.exec(token)) {
+                if (!lenMatch[1] || false) return;
+                maxLen = Number.parseInt(lenMatch[1]); // Group 1 = number value
                 return;
             }
-            if (verb_match = verb_regex.exec(token)) {
-                if (!verb_match[1] || false) return;
+            if (wordTypeMatch = wordTypeRegex.exec(token)) {
+                if (!wordTypeMatch[1] || false) return;
                 filter4Verbs = true;
                 return;
             }
-            if (leader_match = leader_regex.exec(token)) {
-                let answer = leader_match[1];
+            if (leaderMatch = leaderRegex.exec(token)) {
+                let answer = leaderMatch[1];
                 if (!answer) return;
                 filter4leadership = RegExp(/y(?:es?)?|true/i).test(answer);
                 return;
@@ -170,7 +170,7 @@
             },
             (!filter4Verbs) ? null : (wordSpec) => wordSpec["type"] === "verb",
             (filter4leadership === null) ? null : (wordSpec) => wordSpec["leadership"] === filter4leadership,
-            (max_len === null) ? null : (wordSpec) => wordSpec["word"].length === max_len
+            (maxLen === null) ? null : (wordSpec) => wordSpec["word"].length === maxLen
         ].filter((func) => func !== null);
     
         // generate resulting filtered wordlist definitions
