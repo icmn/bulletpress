@@ -139,8 +139,25 @@
                 return;
             }
             if (wordTypeMatch = wordTypeRegex.exec(token)) {
-                if (!wordTypeMatch[1] || false) return;
-                filter4Verbs = true;
+                let desiredType = wordTypeMatch[1];
+                if (!desiredType) return;
+                let typeMatch = RegExp(/^(verb)$/i).exec(desiredType);
+                let group2index = {
+                    "verb": 1
+                }
+                // Iterate through groups (which start at index 1)
+                for (let i = 1, matchGrp = typeMatch[i]; i < typeMatch.length; i++) {
+                    if (matchGrp === undefined) {
+                        continue; // undefined means the group was not found
+                    }
+                    switch (i) {
+                        case group2index["verb"]: // group 1 == verb
+                            filter4Verbs = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 return;
             }
             if (leaderMatch = leaderRegex.exec(token)) {
