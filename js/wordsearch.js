@@ -152,19 +152,22 @@
         });
 
         // Determine filters from basic spelling/regex tokens
-        let filter4spelling = "";
-        let spellingFilter = null;
+        let spellingFilters = [];
         spellingTokens.forEach((token) => {
-            filter4spelling += token.toLowerCase();
-        });
-        if (filter4spelling.length > 0) {
             try {
-                spellingFilter = RegExp(filter4spelling);
+                let filter4spelling = RegExp(token.toLowerCase());
+                spellingFilters.push(filter4spelling);
             } catch (err) {} // Ignore filter if regexp parsing fails
-        }
+        });
     
         const activeFilterFns = [
-            (!spellingFilter) ? null : (wordSpec) => spellingFilter.test(wordSpec["word"]),
+            (spellingFilters.length === 0) ? null : (wordSpec) => {
+                return spellingFilters.reduce((prev, thisRegex) => {
+                    return (!prev)  // already false, don't test
+                        ? prev      // just return false
+                        : thisRegex.test(wordSpec["word"])
+                }, true) // assume true at first
+            },
             (!filter4Verbs) ? null : (wordSpec) => wordSpec["type"] === "verb",
             (filter4leadership === null) ? null : (wordSpec) => wordSpec["leadership"] === filter4leadership,
             (max_len === null) ? null : (wordSpec) => wordSpec["word"].length === max_len
