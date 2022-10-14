@@ -193,6 +193,12 @@ body.light code {
     border-right-color: inherit;
 }
 
+.code {
+    font-family: monospace;
+    font-size: 11pt;
+    line-height: 1.2;
+}
+
 body .hide {
     display: none;
 }
