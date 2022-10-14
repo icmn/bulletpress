@@ -258,7 +258,7 @@ const bulletPress = (string) => {
       return charLength <= MAX_CHARS+3
     } else if (gui.destPkg === DestinationPkgEnum.AF1206) {
       pixelLength = gui.textRuler.measure(x)
-      return pixelLength <= cap && pixelLength >= cap - margin
+      return pixelLength <= cap
     }
     return true
   }).sort((x, y) => {
