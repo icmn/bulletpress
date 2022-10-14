@@ -1,4 +1,4 @@
-.footer > div {
+.footer>div {
     vertical-align: top;
     display: inline-block;
     width: 49.5%;
@@ -6,20 +6,20 @@
     text-align: center;
 }
 
-.footer > div:first-child {
+.footer>div:first-child {
     border-right-width: 1px;
     border-right-style: solid;
 }
 
-body.dark .footer > div:first-child {
+body.dark .footer>div:first-child {
     border-right-color: var(--dark-secondary-bg);
 }
 
-body.light .footer > div:first-child {
+body.light .footer>div:first-child {
     border-right-color: var(--light-secondary-bg);
 }
 
-.footer > div > div {
+.footer>div>div {
     text-align: left;
     display: inline-block;
 }
@@ -30,10 +30,6 @@ body.dark .footer {
 
 body.light .footer {
     color: var(--light-tertiary-bg);
-}
-
-.characterlength {
-    font-family: "Consolas", monospace;
 }
 
 .github-fork-ribbon {
@@ -48,18 +44,43 @@ body.light .github-fork-ribbon::before {
     background-color: var(--light-success);
 }
 
+#bulletpress-editor>fieldset {
+    position: relative;
+    left: 0px;
+}
+
+#bulletpress-editor>fieldset>textarea {
+    position: absolute;
+    left: 1.25ch;
+    width: calc(100% - 1.25ch*2);
+    height: 40ch;
+}
+
 .char-overage {
     text-decoration: underline;
     font-weight: bolder;
 }
 
-textarea, .code {
-    font-family: monospace;
+#bulletpress-editor .storage textarea {
+    height: 8ch;
+}
+
+#bulletpress-editor .storage .workbench-hidden-scalar {
+    height: 8ch;
+}
+
+.workbench-hidden-scalar {
+    height: 40ch;
+    visibility: hidden;
+}
+
+.characterlength {
+    font-family: "Consolas", monospace;
     font-size: 11pt;
     line-height: 1.2;
 }
 
-textarea {
+.characterlength .workbench-hidden-scalar {
     width: 116ch;
 }
 
@@ -69,7 +90,7 @@ textarea {
     line-height: 1.2;
 }
 
-.pixelwidth textarea {
+.pixelwidth .workbench-hidden-scalar {
     width: 98ch;
     font-family: 'Times New Roman';
     font-size: 14pt;
@@ -80,10 +101,10 @@ fieldset {
     width: fit-content;
     margin: auto;
     display: block;
-    padding-block-start: 0.35em;
-    padding-inline-start: 0.75em;
-    padding-inline-end: 0.75em;
-    padding-block-end: 0.625em;
+    padding-block-start: 0.75ch;
+    padding-inline-start: 0.75ch;
+    padding-inline-end: 0.75ch;
+    padding-block-end: 0.75ch;
     min-inline-size: min-content;
     border-width: 2px;
     border-style: groove;
@@ -172,15 +193,15 @@ legend {
     border-bottom-width: 3ch;
 }
 
-.search-tab input + label .close-search-tab {
+.search-tab input+label .close-search-tab {
     display: none;
 }
 
-.search-tab input:checked + label .open-search-tab {
+.search-tab input:checked+label .open-search-tab {
     display: none;
 }
 
-.search-tab input:checked + label .close-search-tab {
+.search-tab input:checked+label .close-search-tab {
     display: inline-block;
 }
 
@@ -188,8 +209,8 @@ legend {
     display: inline-block;
     position: absolute;
     right: 1.25ch;
-    z-index: 10;
-    width: 30ch;
+    z-index: 12;
+    width: 32ch;
     height: 40ch;
     padding: 1vh;
     border-style: outset;
@@ -203,9 +224,9 @@ body.light .search-dialog {
 .search-dialog-help {
     display: inline-block;
     position: absolute;
-    right: 30ch;
-    z-index: 5;
-    width: 40ch;
+    right: 32ch;
+    z-index: 11;
+    width: 42ch;
     height: 39ch;
     margin: 0.5ch 0;
     padding: 1vh;
