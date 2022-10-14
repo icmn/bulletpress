@@ -258,7 +258,7 @@ const bulletPress = (string) => {
       return charLength <= MAX_CHARS+3
     } else if (gui.destPkg === DestinationPkgEnum.AF1206) {
       pixelLength = gui.textRuler.measure(x)
-      return pixelLength <= cap
+      return pixelLength <= cap + margin
     }
     return true
   }).sort((x, y) => {
@@ -286,13 +286,39 @@ const bulletPress = (string) => {
         return str;
       })
       bullets.unshift(Array(MAX_CHARS).fill("#").join(''));
+
     } else if (gui.destPkg === DestinationPkgEnum.AF1206) {
+      // Add overage formatting cue
+      bullets = bullets.map((str) => {
+        if (gui.textRuler.measure(str) <= cap) {
+          return str;
+        }
+        // Overage identified, attempt to highlight
+        let valid_num_chars = str.length;
+        for (let i = 0; i < str.length; i++) {
+          const partialBullet = str.substring(0, valid_num_chars-i)
+          if (gui.textRuler.measure(partialBullet) <= cap) {
+            valid_num_chars -= i;
+            break;
+          }
+        }
+        return [
+          '<span class="warning-font">',
+          str.substring(0, valid_num_chars),
+          '</span>',
+          '<span class="error-font char-overage">',
+          str.substring(valid_num_chars),
+          '</span>'
+        ].join('');
+      });
+      // Add visual cue for maximum pixel length
       visual_cue = "-"
       do {
         visual_cue += visual_cue.charAt(0)
       } while (gui.textRuler.measure(visual_cue) < cap)
       bullets.unshift(visual_cue)
     }
+    // Return bullets wrapped in html tag 1 per line
     return bullets.map((bullet) => '<div>' + bullet + '</div>');
   }
   return [ '<div>No bullets of length/all bullets over length</div>' ]

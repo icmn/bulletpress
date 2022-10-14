@@ -97,6 +97,10 @@ body.light .github-fork-ribbon::before {
     line-height: 1.2;
 }
 
+.pixelwidth #displayArea .warning-font {
+    font-weight: normal;
+}
+
 fieldset {
     width: fit-content;
     margin: auto;
