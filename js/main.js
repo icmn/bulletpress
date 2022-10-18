@@ -176,15 +176,19 @@ const DestinationPkgEnum = Object.freeze({
         },
         help: {
           hideDialog: function() {
-            if (!searchHelpDialog.classList.contains("hide")) {
-              searchHelpDialog.classList.add("hide")
+            if (!searchHelpDialog.parentElement.classList.contains("hide")) {
+              searchHelpDialog.parentElement.classList.add("hide");
+              searchHelpDialog.classList.remove("animate-show");
+              searchHelpDialog.classList.add("animate-hide");
               searchHelpDialog.dispatchEvent(new Event("dialogClose"));
               // searchtxtbox.focus();
             }
           },
           showDialog: function() {
-            if (searchHelpDialog.classList.contains("hide")) {
-              searchHelpDialog.classList.remove("hide");
+            if (searchHelpDialog.parentElement.classList.contains("hide")) {
+              searchHelpDialog.parentElement.classList.remove("hide");
+              searchHelpDialog.classList.remove("animate-hide");
+              searchHelpDialog.classList.add("animate-show");
             }
           },
           showBtn: {

@@ -257,6 +257,54 @@ legend {
     }
 }
 
+@-webkit-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+    
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+    }
+}
+
+@keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
 .search-dialog-container {
     display: inline-block;
     position: absolute;
@@ -304,7 +352,7 @@ body.light .search-dialog {
     border-color: var(--light-tertiary-bg);
 }
 
-.search-dialog-help {
+.search-dialog-help-container {
     display: inline-block;
     position: absolute;
     right: 32ch;
@@ -312,10 +360,42 @@ body.light .search-dialog {
     width: 42ch;
     height: 39ch;
     margin: 0.5ch 0;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 1.5s;
+    border-radius: 5px;
+}
+
+.search-dialog-help-container.hide {
+    opacity: 0;
+}
+
+.search-dialog-help {
+    display: inline-block;
+    position: absolute;
     padding: 1vh;
     border-style: solid;
     border-width: 2px;
     border-radius: 5px;
+    height: 100%;
+}
+
+.search-dialog-help.animate-show {
+    animation-name: fadeInLeft;
+    -webkit-animation-name: fadeInLeft;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+}
+
+.search-dialog-help.animate-hide {
+    animation-name: fadeOutRight;
+    -webkit-animation-name: fadeOutRight;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
 }
 
 .search-dialog-help-text {
@@ -323,6 +403,7 @@ body.light .search-dialog {
     overflow-y: auto;
     height: calc(100% - 2em);
     padding: 0 1ch;
+    opacity: 1;
 }
 
 .search-dialog-help-close-btn {

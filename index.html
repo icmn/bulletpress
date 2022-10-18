@@ -185,85 +185,87 @@
               </div>
             </div>
           </div>
-          <div class="search-dialog-help helpbox hide">
-            <div style="position: relative; height: 100%;">
-              <span class="search-dialog-help-close-btn">x</span>
-              <div style="height: 2em; text-align: center;"><b>Search Tool Syntax</b></div>
-              <div class="search-dialog-help-text">
-                <p>
-                  The <i>BULLETPRESS</i> search tool gives you the power to find the <b>word</b>
-                  you need to make your bullet <b>perfect</b> and more importantly <b>fit!</b> At
-                  the core, it is a word search where it can match words based on spelling.
-                  However, its real power comes from its ability to process <i>Regular Expressions</i>
-                  coupled with extra built-in filter syntax. The filter command syntax provides
-                  ways filter by characteristics of words to help you locate the right word for the
-                  right use.
-                </p>
-                <i>Special Commands</i>
-                <ol>
-                  <li>
-                    <code>length:#</code>&nbsp;Filter down to all words of a specific length.
-                    Replace the <code>#</code> with the desired number of letters. For
-                    example:&nbsp;<code>length:8</code> only provides words with 8 letters.
-                    Shorthand of <code>len:</code> is also accepted.
-                  </li>
-                  <br>
-                  <li>
-                    <code>leadership:[yes|no]</code>&nbsp;Filter words down to those that imply
-                    leadership qualities for report writing. Results are subject to change as it is
-                    highly opinion-based. Applying <code>no</code> will remove words that imply
-                    leadership, which allows for followership focused words. <code>true</code> or
-                    <code>false</code> are accepted as an alternative attribute value. Shorthand
-                    commands of <code>leader:</code>, <code>lead:</code>, <code>led:</code> are
-                    also accepted.
-                  </li>
-                  <br>
-                  <li>
-                    <code>type:verb</code>&nbsp;Filter words by type of word. Currently only
-                    <code>verb</code> is supported and the current word list only contains verbs.
-                  </li>
-                </ol>
-                <i>Regular Expressions</i>
-                <p>
-                  All non-command tokens will be concatenated together as a single token and
-                  processed by the JavaScript <code>RegExp()</code> function. You may use any valid
-                  JavaScript Regular Expression syntax. If it is interpreted as invalid, then the
-                  token will be ignored. Spaces are ignored as it is expected this is a word search
-                  tool with an expected result of a single word (hyphenated words included). Tokens
-                  are defined as a sequence of any non-whitespace characters. Tokens are delinated
-                  by whitespace characters in between seqences of letters, numbers, or symbols. For
-                  example:
+          <div class="search-dialog-help-container hide">
+            <div class="search-dialog-help helpbox">
+              <div style="position: relative; height: 100%;">
+                <span class="search-dialog-help-close-btn">x</span>
+                <div style="height: 2em; text-align: center;"><b>Search Tool Syntax</b></div>
+                <div class="search-dialog-help-text">
+                  <p>
+                    The <i>BULLETPRESS</i> search tool gives you the power to find the <b>word</b>
+                    you need to make your bullet <b>perfect</b> and more importantly <b>fit!</b> At
+                    the core, it is a word search where it can match words based on spelling.
+                    However, its real power comes from its ability to process <i>Regular Expressions</i>
+                    coupled with extra built-in filter syntax. The filter command syntax provides
+                    ways filter by characteristics of words to help you locate the right word for the
+                    right use.
+                  </p>
+                  <i>Special Commands</i>
                   <ol>
                     <li>
-                      <code>^a</code>&nbsp;All words that start with the letter <code>a</code>.
+                      <code>length:#</code>&nbsp;Filter down to all words of a specific length.
+                      Replace the <code>#</code> with the desired number of letters. For
+                      example:&nbsp;<code>length:8</code> only provides words with 8 letters.
+                      Shorthand of <code>len:</code> is also accepted.
                     </li>
+                    <br>
                     <li>
-                      <code>ed$</code>&nbsp;All words that end in the letters <code>ed</code>.
+                      <code>leadership:[yes|no]</code>&nbsp;Filter words down to those that imply
+                      leadership qualities for report writing. Results are subject to change as it is
+                      highly opinion-based. Applying <code>no</code> will remove words that imply
+                      leadership, which allows for followership focused words. <code>true</code> or
+                      <code>false</code> are accepted as an alternative attribute value. Shorthand
+                      commands of <code>leader:</code>, <code>lead:</code>, <code>led:</code> are
+                      also accepted.
                     </li>
+                    <br>
                     <li>
-                      <code>gh</code>&nbsp;All words that contain the letter sequence <code>gh</code>.
+                      <code>type:verb</code>&nbsp;Filter words by type of word. Currently only
+                      <code>verb</code> is supported and the current word list only contains verbs.
                     </li>
                   </ol>
-                </p>
-                <i>Limitations</i>
-                <p>
-                  Our word list is made up of all action verbs commonly used on performance reports
-                  as identified on
-                  <a target="_blank" href="http://www.airforcewriter.com/strong-action-verbs.htm">
-                    http://www.airforcewriter.com/strong-action-verbs.htm
-                  </a>
-                  and characterized by <i>BULLETPRESS</i> developers. The list will continue
-                  to improve as new words and characteristics are identified. 
-                </p>
-                <p>
-                  Space (<code> </code>) characters are ignored in all cases except to separate
-                  one command token from another token. 
-                </p>
-                <p>
-                  The colon (<code>:</code>) character determines between command syntax and regular
-                  expression use. If you use a <code>:</code> with a mispelled or invalid command,
-                  it will be ignored during filtering.
-                </p>
+                  <i>Regular Expressions</i>
+                  <p>
+                    All non-command tokens will be concatenated together as a single token and
+                    processed by the JavaScript <code>RegExp()</code> function. You may use any valid
+                    JavaScript Regular Expression syntax. If it is interpreted as invalid, then the
+                    token will be ignored. Spaces are ignored as it is expected this is a word search
+                    tool with an expected result of a single word (hyphenated words included). Tokens
+                    are defined as a sequence of any non-whitespace characters. Tokens are delinated
+                    by whitespace characters in between seqences of letters, numbers, or symbols. For
+                    example:
+                    <ol>
+                      <li>
+                        <code>^a</code>&nbsp;All words that start with the letter <code>a</code>.
+                      </li>
+                      <li>
+                        <code>ed$</code>&nbsp;All words that end in the letters <code>ed</code>.
+                      </li>
+                      <li>
+                        <code>gh</code>&nbsp;All words that contain the letter sequence <code>gh</code>.
+                      </li>
+                    </ol>
+                  </p>
+                  <i>Limitations</i>
+                  <p>
+                    Our word list is made up of all action verbs commonly used on performance reports
+                    as identified on
+                    <a target="_blank" href="http://www.airforcewriter.com/strong-action-verbs.htm">
+                      http://www.airforcewriter.com/strong-action-verbs.htm
+                    </a>
+                    and characterized by <i>BULLETPRESS</i> developers. The list will continue
+                    to improve as new words and characteristics are identified.
+                  </p>
+                  <p>
+                    Space (<code> </code>) characters are ignored in all cases except to separate
+                    one command token from another token.
+                  </p>
+                  <p>
+                    The colon (<code>:</code>) character determines between command syntax and regular
+                    expression use. If you use a <code>:</code> with a mispelled or invalid command,
+                    it will be ignored during filtering.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
