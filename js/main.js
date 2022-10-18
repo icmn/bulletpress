@@ -140,11 +140,17 @@ const DestinationPkgEnum = Object.freeze({
       }
 
       function toggleViewOfSearchDialog() {
-        searchDialog.classList.toggle("hide");
-        if (!searchDialog.classList.contains("hide")) {
+        searchDialog.parentElement.classList.toggle("hide")
+        if (!searchDialog.classList.contains("animate-show")) {
+          searchDialog.classList.remove("animate-hide");
+          searchDialog.classList.add("animate-show");
           triggerSearchInput();
-          searchtxtbox.focus();
+          setTimeout(() => {
+            searchtxtbox.focus();
+          }, 1500) // matches animation length
         } else {
+          searchDialog.classList.remove("animate-show");
+          searchDialog.classList.add("animate-hide");
           searchDialog.dispatchEvent(new Event("dialogClose"));
         }
       }
@@ -351,7 +357,9 @@ document.onreadystatechange = function () {
     });
     gui.wordsearch.onDialogClose(() => {
       gui.wordsearch.help.hideDialog();
-      gui.textArea.focus();
+      setTimeout(() => {
+        gui.textArea.focus();
+      }, 1200)
     });
     gui.wordsearch.help.showBtn.onclick(() => {
       gui.wordsearch.help.showDialog();

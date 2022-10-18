@@ -209,16 +209,95 @@ legend {
     display: inline-block;
 }
 
-.search-dialog {
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+    
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-100%);
+    }
+}
+
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+.search-dialog-container {
     display: inline-block;
     position: absolute;
     right: 1.25ch;
     z-index: 12;
     width: 32ch;
     height: 40ch;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 1.5s;
+    border-radius: 5px;
+}
+
+.search-dialog-container.hide {
+    opacity: 0;
+}
+
+.search-dialog {
     padding: 1vh;
+    height: 100%;
     border-style: outset;
     border-radius: 5px;
+    opacity: 0;
+}
+
+.search-dialog.animate-show {
+    animation-name: fadeInDown;
+    -webkit-animation-name: fadeInDown;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+}
+
+.search-dialog.animate-hide {
+    animation-name: fadeOutUp;
+    -webkit-animation-name: fadeOutUp;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
 }
 
 body.light .search-dialog {
