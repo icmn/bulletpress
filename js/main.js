@@ -140,11 +140,17 @@ const DestinationPkgEnum = Object.freeze({
       }
 
       function toggleViewOfSearchDialog() {
-        searchDialog.classList.toggle("hide");
-        if (!searchDialog.classList.contains("hide")) {
+        searchDialog.parentElement.classList.toggle("hide")
+        if (!searchDialog.classList.contains("animate-show")) {
+          searchDialog.classList.remove("animate-hide");
+          searchDialog.classList.add("animate-show");
           triggerSearchInput();
-          searchtxtbox.focus();
+          setTimeout(() => {
+            searchtxtbox.focus();
+          }, 1500) // matches animation length
         } else {
+          searchDialog.classList.remove("animate-show");
+          searchDialog.classList.add("animate-hide");
           searchDialog.dispatchEvent(new Event("dialogClose"));
         }
       }
@@ -170,15 +176,19 @@ const DestinationPkgEnum = Object.freeze({
         },
         help: {
           hideDialog: function() {
-            if (!searchHelpDialog.classList.contains("hide")) {
-              searchHelpDialog.classList.add("hide")
+            if (!searchHelpDialog.parentElement.classList.contains("hide")) {
+              searchHelpDialog.parentElement.classList.add("hide");
+              searchHelpDialog.classList.remove("animate-show");
+              searchHelpDialog.classList.add("animate-hide");
               searchHelpDialog.dispatchEvent(new Event("dialogClose"));
               // searchtxtbox.focus();
             }
           },
           showDialog: function() {
-            if (searchHelpDialog.classList.contains("hide")) {
-              searchHelpDialog.classList.remove("hide");
+            if (searchHelpDialog.parentElement.classList.contains("hide")) {
+              searchHelpDialog.parentElement.classList.remove("hide");
+              searchHelpDialog.classList.remove("animate-hide");
+              searchHelpDialog.classList.add("animate-show");
             }
           },
           showBtn: {
@@ -351,7 +361,9 @@ document.onreadystatechange = function () {
     });
     gui.wordsearch.onDialogClose(() => {
       gui.wordsearch.help.hideDialog();
-      gui.textArea.focus();
+      setTimeout(() => {
+        gui.textArea.focus();
+      }, 1200)
     });
     gui.wordsearch.help.showBtn.onclick(() => {
       gui.wordsearch.help.showDialog();
