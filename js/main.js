@@ -1,5 +1,5 @@
 const cap = 764
-const margin = 10
+const margin = 30
 const MAX_CHARS = 115
 const DestinationPkgEnum = Object.freeze({
   'MyEval': 'MyEval',
@@ -265,7 +265,7 @@ const bulletPress = (string) => {
   }).filter((x) => {
     if (gui.destPkg === DestinationPkgEnum.MyEval) {
       charLength = x.length
-      return charLength <= MAX_CHARS+3
+      return charLength <= MAX_CHARS+18
     } else if (gui.destPkg === DestinationPkgEnum.AF1206) {
       pixelLength = gui.textRuler.measure(x)
       return pixelLength <= cap + margin
