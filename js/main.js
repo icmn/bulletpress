@@ -1,5 +1,5 @@
 const cap = 764
-const margin = 30
+const margin = 40
 const MAX_CHARS = 115
 const DestinationPkgEnum = Object.freeze({
   'MyEval': 'MyEval',
