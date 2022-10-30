@@ -45,7 +45,7 @@ const DestinationPkgEnum = Object.freeze({
     if (themeSwitch === null) {
       let element = document.getElementById('ckbox-light-dark-mode')
       let bodyElement = document.body
-    
+
       function isDarkMode() { return bodyElement.classList.contains("dark"); }
       function isLightMode() { return bodyElement.classList.contains("light"); }
       function onclick(func) { element.addEventListener("click", func); }
@@ -74,7 +74,7 @@ const DestinationPkgEnum = Object.freeze({
       let editor = document.getElementById("bulletpress-editor")
       let element = document.getElementById("ckbox-style-mode")
       let mode = DestinationPkgEnum.MyEval // DEFAULT == checked
-    
+
       function isMyEvalStyle() { return mode === DestinationPkgEnum.MyEval }
       function is1206Style() { return mode === DestinationPkgEnum.AF1206 }
       function onclick(func) { element.addEventListener("click", func); }
@@ -107,15 +107,15 @@ const DestinationPkgEnum = Object.freeze({
       let canvas = document.createElement('canvas')
       let ctx = canvas.getContext('2d')
       ctx.font="12pt Times New Roman"
-    
+
       function measure(text) {
         return Math.ceil(ctx.measureText(text).width)
       }
-    
+
       function countSpaces(text) {
         return text.split(" ").length - 1
       }
-      
+
       textRuler = {
         measure: measure,
         countSpaces: countSpaces
@@ -236,17 +236,17 @@ const DestinationPkgEnum = Object.freeze({
 
 
 const bulletPress = (string) => {
-  
+
   let replacements = [
     [/\s*--\s*/gi, '--'],   // 'asdf -- abcd' >>> 'asdf--abcd'
     [/^\s*-?\s*/gi, '- '],       // ' asdf' >>> '- asdf'
     [/\s+$/gi, ''],         // 'asdf ' >>> 'asdf'
-    [/\s*\/\s*/gi, '/'], 
+    [/\s*\/\s*/gi, '/'],
     [/\s*,/gi, ','],
     [/\s+;/gi, ';'],
     [/\s+/gi, ' ']
   ]
-  
+
   let pieces = string
     .split('\n')
     .map((x) => x.split('|'))
