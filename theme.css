@@ -198,3 +198,7 @@ body.light code {
     font-size: 11pt;
     line-height: 1.2;
 }
+
+.clickable {
+    cursor: pointer;
+}

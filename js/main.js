@@ -139,20 +139,28 @@ const DestinationPkgEnum = Object.freeze({
         searchtxtbox.dispatchEvent(new Event("input"))
       }
 
+      function showSearchDialog() {
+        searchDialog.parentElement.classList.remove("hide");
+        searchDialog.classList.remove("animate-hide");
+        searchDialog.classList.add("animate-show");
+        triggerSearchInput();
+        setTimeout(() => {
+          searchtxtbox.focus();
+        }, 1500) // matches animation length
+      }
+      function hideSearchDialog() {
+        searchDialog.classList.remove("animate-show");
+        searchDialog.classList.add("animate-hide");
+        searchDialog.parentElement.classList.add("hide");
+      }
+
       function toggleViewOfSearchDialog() {
-        searchDialog.parentElement.classList.toggle("hide")
-        if (!searchDialog.classList.contains("animate-show")) {
-          searchDialog.classList.remove("animate-hide");
-          searchDialog.classList.add("animate-show");
-          triggerSearchInput();
-          setTimeout(() => {
-            searchtxtbox.focus();
-          }, 1500) // matches animation length
-        } else {
-          searchDialog.classList.remove("animate-show");
-          searchDialog.classList.add("animate-hide");
-          searchDialog.dispatchEvent(new Event("dialogClose"));
-        }
+        evt = new Event(
+          (!searchDialog.classList.contains("animate-show"))
+          ? "dialogOpen"
+          : "dialogClose"
+        )
+        searchDialog.dispatchEvent(evt);
       }
 
       function updateWordListView(wordDefList) {
@@ -167,6 +175,9 @@ const DestinationPkgEnum = Object.freeze({
 
       wordsearch = {
         toggleViewOfSearchDialog,
+        showSearchDialog,
+        hideSearchDialog,
+        onDialogOpen: function(func) { searchDialog.addEventListener("dialogOpen", func); },
         onDialogClose: function(func) { searchDialog.addEventListener("dialogClose", func); },
         onclick: function(func) { toggleBtn.addEventListener("click", func); },
         searchtext: {
@@ -175,20 +186,25 @@ const DestinationPkgEnum = Object.freeze({
           triggerInput: triggerSearchInput
         },
         help: {
+          isVisible: function() {
+            return !searchHelpDialog.parentElement.classList.contains("hide")
+          },
           hideDialog: function() {
-            if (!searchHelpDialog.parentElement.classList.contains("hide")) {
+            if (gui.wordsearch.help.isVisible()) {
               searchHelpDialog.parentElement.classList.add("hide");
               searchHelpDialog.classList.remove("animate-show");
               searchHelpDialog.classList.add("animate-hide");
-              searchHelpDialog.dispatchEvent(new Event("dialogClose"));
-              // searchtxtbox.focus();
+              // searchHelpDialog.dispatchEvent(new Event("dialogClose"));
+              searchtxtbox.focus();
+              searchDialogHelpBtn.parentElement.classList.add("clickable")
             }
           },
           showDialog: function() {
-            if (searchHelpDialog.parentElement.classList.contains("hide")) {
+            if (!gui.wordsearch.help.isVisible()) {
               searchHelpDialog.parentElement.classList.remove("hide");
               searchHelpDialog.classList.remove("animate-hide");
               searchHelpDialog.classList.add("animate-show");
+              searchDialogHelpBtn.parentElement.classList.remove("clickable")
             }
           },
           showBtn: {
@@ -359,11 +375,21 @@ document.onreadystatechange = function () {
         Dictionary.search(gui.wordsearch.searchtext.value)
       )
     });
+    gui.wordsearch.onDialogOpen(() => {
+      gui.wordsearch.showSearchDialog();
+    })
     gui.wordsearch.onDialogClose(() => {
-      gui.wordsearch.help.hideDialog();
+      let wordsearchClosingDelay = 0
+      if (gui.wordsearch.help.isVisible()) {
+        gui.wordsearch.help.hideDialog();
+        wordsearchClosingDelay += 700
+      }
       setTimeout(() => {
-        gui.textArea.focus();
-      }, 1200)
+        gui.wordsearch.hideSearchDialog();
+        setTimeout(() => {
+          gui.textArea.focus();
+        }, 900);
+      }, wordsearchClosingDelay);
     });
     gui.wordsearch.help.showBtn.onclick(() => {
       gui.wordsearch.help.showDialog();
